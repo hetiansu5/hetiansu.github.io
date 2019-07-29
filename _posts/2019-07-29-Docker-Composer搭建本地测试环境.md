@@ -4,7 +4,7 @@ title: 'Docker-Composer搭建本地测试环境'
 date: 2019-07-29
 author: Tinson
 cover: 'http://on2171g4d.bkt.clouddn.com/jekyll-banner.png'
-tags: GoLand debug Go
+tags: Docker
 ---
 
 ## Docker开发环境
