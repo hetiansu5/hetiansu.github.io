@@ -30,9 +30,9 @@ noCopy这个主要用来限制不能进行copy，这里是为了避免copy后的
 
 数组的三个元素（非顺序）：
 
-- couter 被等待线程计数
-- waiter 等待者计数（有多少个线程阻塞等待线程结束被唤醒）
-- semap 信号量
+- couter 通过Add()设置的子goroutine的数量，即被等待线程计数
+- waiter 通过Wait()陷入阻塞的等待者计数
+- semap  信号量，用于唤醒阻塞waiter
 
 这里需要注意一下couter、waiter、semap并不是顺序存储的，64bit操作系统的原子操作需要保证64bit的内存对齐，在设计上我们需要保证couter和waiter的操作原子性。如果数组的首元素地址能被8整除，则counter和waiter刚好可以在同一块原子操作的64bit内存上，所以取数组前两个元素分别表示couter和waiter；如果不能被8整除（根据内存对齐的原理，地址必然是4的倍数），则取数组后两个。
 
